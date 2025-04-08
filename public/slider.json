@@ -1,0 +1,26 @@
+[
+  {
+    "id": 1,
+    "title": "Professional Laptop Maintenance Services",
+    "subtitle": "We offer reliable and affordable laptop services including hardware repairs, software troubleshooting,",
+    "image": "/images/laptop.webp"
+  },
+  {
+    "id": 2,
+    "title": "Expert Smartphone Repair & Care Services",
+    "subtitle": "Get fast and professional smartphone repair services including cracked screen fixes, battery replacements.",
+    "image": "/images/smartPhone.jpg"
+  },
+  {
+    "id": 3,
+    "title": "Reliable Camera Repair & Maintenance Services",
+    "subtitle": "We specialize in professional camera repair and maintenance services for DSLR, mirrorless, and point-and-shoot cameras.",
+    "image": "/images/camera.jpg"
+  },
+  {
+    "id": 4,
+    "title": "Trusted Desktop Repair & Upgrade Services",
+    "subtitle": "From hardware repairs to performance upgrades, we provide reliable desktop services tailored to your needs.",
+    "image": "/images/desktop.jpg"
+  }
+]

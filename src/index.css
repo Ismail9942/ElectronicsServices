@@ -1,0 +1,28 @@
+@import url("https://fonts.googleapis.com/css2?family=Italianno&display=swap");
+
+@import "tailwindcss";
+@plugin "daisyui";
+html {
+  overflow-y: scroll;
+}
+
+*/ body {
+  background-color: white;
+  color: #353a58;
+}
+
+/* Dark Mode */
+.dark body {
+  background-color: #1a202c;
+  color: white;
+}
+
+.group-content a {
+  display: block;
+}
+.group-content {
+  display: none;
+}
+.group:hover .group-content {
+  display: block;
+}
