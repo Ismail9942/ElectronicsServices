@@ -1,14 +1,21 @@
-import React from "react";
+import Aos from "aos";
+import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
 
 const ServiceCard = ({ service }) => {
-  const { title, provider, price, service_area, photoURL, description } =
+  useEffect(() => {
+    Aos.init({ duration: 2000 });
+  }, []);
+  const { title, provider, price, service_area, photoURL, description, _id } =
     service || {};
   return (
-    <div className="card rounded-none bg-base-100 w-96 shadow-xl">
+    <div
+      data-aos="zoom-in"
+      className="card rounded-none bg-base-100 w-96 shadow-2xl"
+    >
       <figure>
         <img
-          className="w-full border-2 border-[#e26d2f]"
+          className="w-full border-2 border-[#e26d2f] object-cover transition-all duration-300 ease-linear   hover:rotate-2 group-hover:scale-105"
           src={photoURL}
           alt=""
         />
@@ -37,12 +44,15 @@ const ServiceCard = ({ service }) => {
         </p>
         <p className=" text-sm text-gray-600 ">
           <span className="font-bold">Description:</span>{" "}
-          {(description && description.substring(0, 70)) ||
+          {(description && description.substring(0, 35)) ||
             "Not Availeable Description"}
           ...
         </p>
         <div className="card-actions ">
-          <Link className="btn bg-gray-900 text-white w-full">
+          <Link
+            to={`/services/${service._id}`}
+            className="btn bg-gray-900 text-white w-full"
+          >
             View Details
           </Link>
         </div>

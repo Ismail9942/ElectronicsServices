@@ -8,7 +8,6 @@ import SignIn from "../authentication/SignIn";
 import Services from "../pages/Dashboard/Services";
 
 // ✅ Dashboard Pages
-import Dashboard from "../pages/Dashboard/Dashboard";
 import AddService from "../pages/Dashboard/AddService";
 import SingleService from "../pages/Dashboard/SingleService";
 import BookedService from "../pages/Dashboard/BookedService";
@@ -47,7 +46,7 @@ const router = createBrowserRouter([
         ),
       },
       {
-        path: "/singleService",
+        path: "/services/:id",
         element: (
           <PrivateRoute>
             <SingleService />

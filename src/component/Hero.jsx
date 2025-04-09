@@ -8,16 +8,16 @@ const Hero = () => {
       referrerPolicy="no-referrer"
       className="hero relative "
       style={{
-        height: "70vh",
+        height: "80vh",
         backgroundImage: `url(${heroImg})`,
         backgroundPosition: "center",
         backgroundSize: "cover",
       }}
     >
-      <div className="absolute inset-0 bg-black/30 bg-opacity-60"></div>
+      <div className="absolute inset-0 bg-black/40 bg-opacity-60"></div>
       <div className="hero-content text-white text-center relative z-20">
         <div>
-          <p className="text-[#FF3600] font-bold text-lg">
+          <p className="text-green-600 font-bold text-lg">
             ★ Welcome To Electronics Service Center
           </p>
           <h1 className="mb-5 md:mb-8 text-5xl md:text-6xl font-bold">
@@ -32,9 +32,11 @@ const Hero = () => {
             />
           </h1>
           <p className="mb-5 text-lg">
-            Browse through our wide selection of cars, ready to rent at
-            affordable prices <br />
-            with convenient availability and locations.
+            We offer fast and reliable repair services for all kinds of
+            electronic devices — from phones and laptops to home appliances.{" "}
+            <br />
+            Quality parts, expert care, and customer satisfaction are our top
+            priorities.
           </p>
         </div>
       </div>

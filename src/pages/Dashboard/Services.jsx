@@ -3,6 +3,7 @@ import ErrorToaster from "../../component/ErrorToaster";
 import axios from "axios";
 import ServiceCard from "../../component/ServiceCard";
 import Hero from "../../component/Hero";
+import Title from "./Title";
 
 const Services = () => {
   const [services, setServices] = useState([]);
@@ -14,17 +15,17 @@ const Services = () => {
   const fetchAllServices = async () => {
     try {
       const { data } = await axios.get(
-        `${import.meta.env.VITE_API_URL}/services`
+        `${import.meta.env.VITE_API_URL}/allServices`
       );
       setServices(data);
     } catch (error) {
       ErrorToaster(error.message);
     }
   };
-  console.log(services);
   return (
     <>
       <Hero />
+
       <div className="container px-6 py-10 mx-auto min-h-[calc(100vh-306px)] flex flex-col justify-between">
         <div>
           <div className="flex flex-col md:flex-row justify-center items-center gap-5 ">
