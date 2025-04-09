@@ -1,9 +1,12 @@
 import axios from "axios";
 import { useAuth } from "../../auth/AtuhProvider";
 import ErrorToaster from "../../component/ErrorToaster";
+import SuccesToaster from "../../component/SuccesToaster";
+import { useNavigate } from "react-router-dom";
 
 const AddService = () => {
   const { user } = useAuth();
+  const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -26,11 +29,10 @@ const AddService = () => {
     };
 
     try {
-      const { data } = await axios.post(
-        `${import.meta.env.VITE_API_URL}/service`,
-        formData
-      );
-      console.log(data);
+      await axios.post(`${import.meta.env.VITE_API_URL}/service`, formData);
+      form.reset();
+      SuccesToaster("Data Added Successfully!!");
+      navigate("/manageService");
     } catch (error) {
       ErrorToaster(error.message);
     }

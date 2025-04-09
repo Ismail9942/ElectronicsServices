@@ -14,7 +14,6 @@ import SingleService from "../pages/Dashboard/SingleService";
 import BookedService from "../pages/Dashboard/BookedService";
 import ServiceTodo from "../pages/Dashboard/ServiceToDo";
 import ManageServices from "../pages/Dashboard/ManageServices";
-import AllServices from "../pages/Dashboard/AllServices";
 import PrivateRoute from "../Private/PrivateRoute";
 
 const router = createBrowserRouter([
@@ -44,14 +43,6 @@ const router = createBrowserRouter([
         element: (
           <PrivateRoute>
             <AddService />
-          </PrivateRoute>
-        ),
-      },
-      {
-        path: "/allServices",
-        element: (
-          <PrivateRoute>
-            <AllServices />
           </PrivateRoute>
         ),
       },

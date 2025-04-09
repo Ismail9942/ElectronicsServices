@@ -66,17 +66,7 @@ const CustomNavbar = () => {
                 >
                   Add Service
                 </NavLink>
-                {/* all services */}
-                <NavLink
-                  to="/allServices"
-                  className={({ isActive }) =>
-                    isActive
-                      ? " bg-red-600 hover:bg-red-700 px-3 py-2 shadow text-white"
-                      : " hover:text-gray-300 px-3 py-2"
-                  }
-                >
-                  All Services
-                </NavLink>
+
                 {/* Manage Service */}
                 <NavLink
                   to="/manageService"
