@@ -10,8 +10,8 @@ const ServiceCard = ({ service }) => {
     service || {};
   return (
     <div
-      data-aos="zoom-in"
-      className="card rounded-none bg-base-100 w-96 shadow-2xl"
+      data-aos="zoom-in-up"
+      className="card rounded-none bg-base-200 text-black w-96 shadow-2xl"
     >
       <figure>
         <img
@@ -31,14 +31,16 @@ const ServiceCard = ({ service }) => {
           </h4>
         </div>
         <div className="border-t"></div>
-        <h2 className="card-title">Name: {title}</h2>
+        <h2 className="card-title">
+          Name : <span className="ml-3">{title}</span>
+        </h2>
         <p>
-          {" "}
-          <span className="font-bold">Area:</span> {service_area}
+          <span className="font-semibold text-base">Area :</span>
+          <span className="ml-3">{service_area}</span>
         </p>
-        <p className="font-bold">
-          Price:
-          <span className="font-bold bg-green-300 px-4  rounded-3xl">
+        <p className="font-semibold text-base">
+          Price :
+          <span className="font-bold bg-green-300 w-28 ml-3 px-2 text-black/80 rounded-3xl">
             ${price}
           </span>
         </p>

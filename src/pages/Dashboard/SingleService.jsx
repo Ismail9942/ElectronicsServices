@@ -1,10 +1,11 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-import DatePicker from "react-datepicker";
 import { useParams } from "react-router-dom";
 import ErrorToaster from "../../component/ErrorToaster";
+import BookNowModal from "../../component/BookNowModal";
 
 const SingleService = () => {
+  const [isOpen, setIsOpen] = useState(false);
   const [service, setService] = useState({});
   const { id } = useParams();
 
@@ -61,12 +62,22 @@ const SingleService = () => {
           </p>
 
           <div className="card-actions">
-            <button className="btn bg-orange-700 hover:bg-gray-800 text-white/90 shadow-sm shadow-red-700 w-full mx-auto rounded-3xl">
+            <button
+              onClick={() => setIsOpen(true)}
+              className="btn bg-gray-900 hover:bg-green-600 text-white/90 shadow-sm shadow-red-700 w-full mx-auto rounded-3xl"
+            >
               Book Now
             </button>
           </div>
         </div>
       </div>
+      {isOpen && (
+        <BookNowModal
+          service={service}
+          isOpen={isOpen}
+          onClose={() => setIsOpen(false)}
+        />
+      )}
     </div>
   );
 };
