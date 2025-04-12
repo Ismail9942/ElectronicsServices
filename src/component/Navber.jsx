@@ -11,8 +11,8 @@ const CustomNavbar = () => {
   const { user } = useAuth();
 
   return (
-    <nav className="w-full shadow-md p-4 bg-[#34495ecc] text-white fixed top-0 z-50 mb-16">
-      <div className="container mx-auto flex justify-between items-center gap-6">
+    <nav className="shadow-md py-4 bg-[#34495ecc] text-white">
+      <div className="flex justify-between items-center gap-6">
         {/* Logo */}
         <NavLink to="/" className="flex items-center gap-2">
           <FaScrewdriverWrench className="w-10 h-10 text-[#e7000b] bg-white hover:bg-gray-200 border border-e-red-600 p-2 rounded-full" />

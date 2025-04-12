@@ -26,6 +26,7 @@ const AddService = () => {
       photoURL,
       description,
       bid_count: 0,
+      status: "Pending",
     };
 
     try {

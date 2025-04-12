@@ -36,10 +36,10 @@ const Banner = () => {
           <div className="absolute inset-0 bg-[#0000004d]"></div>
           <div className="absolute inset-0 flex flex-col items-center justify-center text-white">
             {/* Text Content */}
-            <h1 className="text-4xl md:text-5xl font-bold uppercase animate-fadeInUp">
+            <h1 className="text-3xl md:text-5xl font-bold uppercase animate-fadeInUp">
               {slide.title}
             </h1>
-            <p className="mt-3 text-lg md:text-xl animate-fadeInUp">
+            <p className="mt-3 text-center text-lg md:text-xl animate-fadeInUp">
               {slide.subtitle}
             </p>
             <Link

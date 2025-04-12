@@ -27,8 +27,7 @@ const Services = () => {
   return (
     <>
       <Hero />
-
-      <div className="container px-6 py-10 mx-auto min-h-[calc(100vh-306px)] flex flex-col justify-between">
+      <div className="py-10">
         <div>
           <div className="flex flex-col md:flex-row justify-center items-center gap-5 ">
             <form>
@@ -38,8 +37,9 @@ const Services = () => {
                   className="px-6 py-2 text-gray-700 placeholder-gray-500 bg-white outline-none focus:placeholder-transparent"
                   type="text"
                   name="search"
-                  placeholder="Enter Job Title"
-                  aria-label="Enter Job Title"
+                  value={search}
+                  placeholder="Enter Service Title"
+                  aria-label="Enter service Title"
                 />
 
                 <button className="px-1 md:px-4 py-3 text-sm font-medium tracking-wider text-gray-100 uppercase transition-colors duration-300 transform bg-gray-700 rounded-md hover:bg-gray-600 focus:bg-gray-600 focus:outline-none">
@@ -55,7 +55,7 @@ const Services = () => {
               Reset
             </button>
           </div>
-          <div className="w-10/12 max-w-full mx-auto grid grid-cols-1 gap-6 my-8 md:grid-cols-2 lg:grid-cols-3">
+          <div className="grid grid-cols-1 gap-6 my-8 md:grid-cols-2 lg:grid-cols-3">
             {services?.map((service) => (
               <ServiceCard key={service._id} service={service} />
             ))}

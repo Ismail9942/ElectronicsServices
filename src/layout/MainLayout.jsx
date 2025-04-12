@@ -9,8 +9,10 @@ const MainLayout = () => {
   return (
     <div className="min-h-screen flex flex-col container">
       <Toaster position="top-center" reverseOrder={false} />
-      <Navber />
-      <div className="pt-18 flex-grow">
+      <header className="w-full sticky top-0 z-50">
+        <Navber />
+      </header>
+      <div className="flex-grow">
         <Outlet />
       </div>
       <Footer />

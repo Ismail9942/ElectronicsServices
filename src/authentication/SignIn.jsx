@@ -25,27 +25,29 @@ const SignIn = () => {
   const handleLogIn = async (e) => {
     e.preventDefault();
     const form = e.target;
-    const email = form.email.value;
+    const email = form.email.value.trim();
     const password = form.password.value;
 
-    // cheek email & password
+    // Check email & password
     if (!email || !password) {
-      ErrorToaster("Provite Your Valided Email & Password");
+      ErrorToaster("Please provide a valid email and password.");
       return;
     }
+
     try {
       const user = await userLogIn(email, password);
       if (user) {
         setUser(user);
-        SuccesToaster("Successfully Registered!");
+        SuccesToaster("Successfully Logged In!");
 
+        // Safe navigation
         location.state ? navigate(location.state) : navigate("/");
       } else {
-        throw new Error("user login failed");
+        throw new Error("User login failed");
       }
     } catch (error) {
-      ErrorToaster(error.message);
-      return;
+      console.error("Login Error:", error.message);
+      ErrorToaster(error.message || "Login failed. Please try again.");
     }
   };
 

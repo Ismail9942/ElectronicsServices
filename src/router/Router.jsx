@@ -14,6 +14,7 @@ import BookedService from "../pages/Dashboard/BookedService";
 import ServiceTodo from "../pages/Dashboard/ServiceToDo";
 import ManageServices from "../pages/Dashboard/ManageServices";
 import PrivateRoute from "../Private/PrivateRoute";
+import ManageUpdated from "../pages/Dashboard/ManageUpdated";
 
 const router = createBrowserRouter([
   {
@@ -66,6 +67,14 @@ const router = createBrowserRouter([
         element: (
           <PrivateRoute>
             <BookedService />
+          </PrivateRoute>
+        ),
+      },
+      {
+        path: "/manageUpdated/:id",
+        element: (
+          <PrivateRoute>
+            <ManageUpdated />
           </PrivateRoute>
         ),
       },

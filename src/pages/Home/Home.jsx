@@ -23,10 +23,10 @@ const Home = () => {
     }
   };
   return (
-    <div>
+    <div className="">
       <Banner />
       <Title />
-      <div className="w-10/12 max-w-full mx-auto grid grid-cols-1 gap-6 my-8 md:grid-cols-2 lg:grid-cols-3">
+      <div className="grid grid-cols-1 gap-6 my-8 md:grid-cols-2 lg:grid-cols-3">
         {services?.map((service) => (
           <ServiceCard key={service._id} service={service} />
         ))}

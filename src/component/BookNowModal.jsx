@@ -16,8 +16,8 @@ const BookNowModal = ({ service, isOpen, onClose }) => {
       return ErrorToaster("Action not permitted");
 
     const form = e.target;
-    const serviceTakingDate = form.date.value;
-    const specialInstruction = form.instruction.value;
+    const serviceDate = form.date.value;
+    const description = form.instruction.value;
 
     const bookingData = {
       serviceId: service._id,
@@ -27,10 +27,10 @@ const BookNowModal = ({ service, isOpen, onClose }) => {
       providerName: service.provider.displayName,
       userEmail: user.email,
       userName: user.displayName,
-      serviceTakingDate,
-      specialInstruction,
+      serviceDate,
+      description,
       price: service.price,
-      serviceStatus: "pending",
+      status: "Pending",
     };
 
     try {

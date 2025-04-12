@@ -11,7 +11,7 @@ const ServiceCard = ({ service }) => {
   return (
     <div
       data-aos="zoom-in-up"
-      className="card rounded-none bg-base-200 text-black w-96 shadow-2xl"
+      className="card rounded-none bg-base-200 text-black shadow-2xl"
     >
       <figure>
         <img
