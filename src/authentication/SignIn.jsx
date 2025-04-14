@@ -2,16 +2,16 @@ import React, { useEffect, useRef, useState } from "react";
 import loginLottieData from "../assets/login.json";
 import Lottie from "lottie-react";
 import Aos from "aos";
-import { useAuth } from "../auth/AtuhProvider";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import ErrorToaster from "../component/ErrorToaster";
 import SuccesToaster from "../component/SuccesToaster";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
+import UseAuth from "../auth/UseAuth";
 
 const SignIn = () => {
   const navigate = useNavigate();
   const location = useLocation();
-  const { googleSignIn, userLogIn, setUser, resetPassword } = useAuth();
+  const { googleSignIn, userLogIn, setUser, resetPassword } = UseAuth();
   const emailRef = useRef();
   const [showPassword, setShowPassword] = useState(false);
 

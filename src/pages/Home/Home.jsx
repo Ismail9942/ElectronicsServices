@@ -4,6 +4,8 @@ import axios from "axios";
 import ErrorToaster from "../../component/ErrorToaster";
 import ServiceCard from "../../component/ServiceCard";
 import Title from "../Dashboard/Title";
+import ServiceHighlight from "../about/ServiceHighlight ";
+import Contact from "../Contact/Contact";
 
 const Home = () => {
   const [services, setServices] = useState([]);
@@ -31,6 +33,8 @@ const Home = () => {
           <ServiceCard key={service._id} service={service} />
         ))}
       </div>
+      <ServiceHighlight />
+      <Contact />
     </div>
   );
 };

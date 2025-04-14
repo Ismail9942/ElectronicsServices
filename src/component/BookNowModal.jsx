@@ -1,11 +1,11 @@
 import axios from "axios";
-import { useAuth } from "../auth/AtuhProvider";
 import SuccesToaster from "./SuccesToaster";
 import ErrorToaster from "./ErrorToaster";
 import { useNavigate } from "react-router-dom";
+import UseAuth from "../auth/UseAuth";
 
 const BookNowModal = ({ service, isOpen, onClose }) => {
-  const { user } = useAuth();
+  const { user } = UseAuth();
   const navigate = useNavigate();
   const { provider } = service || {};
 
@@ -21,16 +21,16 @@ const BookNowModal = ({ service, isOpen, onClose }) => {
 
     const bookingData = {
       serviceId: service._id,
-      serviceName: service.title,
+      category: service.category,
       serviceImage: service.photoURL,
-      providerEmail: service.provider.email,
-      providerName: service.provider.displayName,
+      provider: provider?.email,
       userEmail: user.email,
       userName: user.displayName,
       serviceDate,
       description,
       price: service.price,
       status: "Pending",
+      bid_count: service.bid_count,
     };
 
     try {
@@ -53,7 +53,7 @@ const BookNowModal = ({ service, isOpen, onClose }) => {
   return (
     <div className="fixed inset-0 bg-black/80 bg-opacity-50 flex justify-center items-center z-50 min-h-[90vh] overflow-y-auto sm:mx-4">
       <div className="bg-white/35 p-6 rounded-lg w-full max-w-2xl ">
-        <h2 className="text-xl font-bold mb-4">Book Service</h2>
+        <h2 className="text-xl font-bold mb-4">Book Service Now!</h2>
         <form onSubmit={handleBooking} className="md:grid grid-cols-2 gap-4">
           {/* Service and User Info */}
           <div>
@@ -67,16 +67,20 @@ const BookNowModal = ({ service, isOpen, onClose }) => {
               readOnly
             />
           </div>
-          <div>
-            <label htmlFor="serviceName" className="block font-semibold mb-2">
-              Service Name
+
+          <div className="flex flex-col gap-2">
+            <label className="text-gray-700 " htmlFor="category">
+              Category
             </label>
-            <input
-              defaultValue={service.title}
-              id="serviceName"
-              className="input input-bordered text-gray-900 w-full"
-              readOnly
-            />
+            <select
+              name="category"
+              id="category"
+              className="border text-gray-900 bg-white p-2 rounded-md"
+            >
+              <option value="Laptop Service">Laptop Service</option>
+              <option value="Smartphone Service">Smartphone Service</option>
+              <option value="Desktop Service">Desktop Service</option>
+            </select>
           </div>
 
           <div>
@@ -130,7 +134,7 @@ const BookNowModal = ({ service, isOpen, onClose }) => {
               User Name
             </label>
             <input
-              defaultValue={user?.displayName}
+              defaultValue={user?.displayName || "Ismail Hossain"}
               id="userName"
               className="input input-bordered text-gray-900 w-full"
               readOnly

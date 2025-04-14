@@ -6,8 +6,16 @@ const ServiceCard = ({ service }) => {
   useEffect(() => {
     Aos.init({ duration: 2000 });
   }, []);
-  const { title, provider, price, service_area, photoURL, description, _id } =
-    service || {};
+  const {
+    category,
+    provider,
+    price,
+    service_area,
+    photoURL,
+    description,
+    _id,
+  } = service || {};
+
   return (
     <div
       data-aos="zoom-in-up"
@@ -15,7 +23,7 @@ const ServiceCard = ({ service }) => {
     >
       <figure>
         <img
-          className="w-full border-2 border-[#e26d2f] object-cover transition-all duration-300 ease-linear   hover:rotate-2 group-hover:scale-105"
+          className="w-full h-[300px] border-2 border-[#e26d2f] object-cover transition-all duration-300 ease-linear   hover:rotate-2 group-hover:scale-105"
           src={photoURL}
           alt=""
         />
@@ -32,7 +40,7 @@ const ServiceCard = ({ service }) => {
         </div>
         <div className="border-t"></div>
         <h2 className="card-title">
-          Name : <span className="ml-3">{title}</span>
+          Name : <span className="ml-3">{category}</span>
         </h2>
         <p>
           <span className="font-semibold text-base">Area :</span>

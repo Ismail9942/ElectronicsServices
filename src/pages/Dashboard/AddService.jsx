@@ -1,25 +1,25 @@
 import axios from "axios";
-import { useAuth } from "../../auth/AtuhProvider";
 import ErrorToaster from "../../component/ErrorToaster";
 import SuccesToaster from "../../component/SuccesToaster";
 import { useNavigate } from "react-router-dom";
+import UseAuth from "../../auth/UseAuth";
 
 const AddService = () => {
-  const { user } = useAuth();
+  const { user } = UseAuth();
   const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     const form = e.target;
     const email = form.email.value;
-    const title = form.service_title.value;
+    const category = form.category.value;
     const price = parseFloat(form.price.value);
     const service_area = form.service_area.value;
     const photoURL = form.photoURL.value;
     const description = form.description.value;
 
     const formData = {
-      title,
+      category,
       provider: { email, name: user?.displayName, photo: user?.photoURL },
       price,
       service_area,
@@ -43,7 +43,7 @@ const AddService = () => {
     <div className="flex justify-center items-center min-h-[calc(100vh-306px)] my-12">
       <section className=" p-2 md:p-6 mx-auto bg-white rounded-md shadow-md ">
         <h2 className="text-lg font-semibold text-gray-700 capitalize ">
-          Add Service
+          Added New Service
         </h2>
 
         <form onSubmit={handleSubmit}>
@@ -62,17 +62,19 @@ const AddService = () => {
               />
             </div>
 
-            <div>
-              <label className="text-gray-700 " htmlFor="service_title">
-                Service Name
+            <div className="flex flex-col gap-2 ">
+              <label className="text-gray-700 " htmlFor="category">
+                Category
               </label>
-              <input
-                id="service_title"
-                name="service_title"
-                type="text"
-                required
-                className="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-500 rounded-md  focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40  focus:outline-none focus:ring"
-              />
+              <select
+                name="category"
+                id="category"
+                className="border text-gray-700 p-2 rounded-md"
+              >
+                <option value="Laptop Service">Laptop Service</option>
+                <option value="Smartphone Service">Smartphone Service</option>
+                <option value="Desktop Service">Desktop Service</option>
+              </select>
             </div>
 
             <div>

@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-import { useAuth } from "../auth/AtuhProvider";
 import { Link, useNavigate } from "react-router-dom";
 import Aos from "aos";
 import Lottie from "lottie-react";
@@ -8,9 +7,10 @@ import ErrorToaster from "../component/ErrorToaster";
 import SuccesToaster from "../component/SuccesToaster";
 import { FaEye } from "react-icons/fa";
 import { FaEyeSlash } from "react-icons/fa6";
+import UseAuth from "../auth/UseAuth";
 
 const Register = () => {
-  const { googleSignIn, userRegister, setUser } = useAuth();
+  const { googleSignIn, userRegister, setUser } = UseAuth();
   const navigate = useNavigate();
   const [showPassword, setShowPassword] = useState(false);
 

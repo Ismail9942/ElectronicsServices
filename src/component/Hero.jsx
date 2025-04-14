@@ -31,6 +31,7 @@ const Hero = () => {
               delaySpeed={1000}
             />
           </h1>
+
           <p className="mb-5 text-lg">
             We offer fast and reliable repair services for all kinds of
             electronic devices — from phones and laptops to home appliances.{" "}

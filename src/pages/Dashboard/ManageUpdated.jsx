@@ -1,12 +1,12 @@
 import axios from "axios";
-import { useAuth } from "../../auth/AtuhProvider";
 import ErrorToaster from "../../component/ErrorToaster";
 import SuccesToaster from "../../component/SuccesToaster";
 import { useNavigate, useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
+import UseAuth from "../../auth/UseAuth";
 
 const ManageUpdated = () => {
-  const { user } = useAuth();
+  const { user } = UseAuth();
   const navigate = useNavigate();
   const [service, setService] = useState({});
   const { id } = useParams();
@@ -26,7 +26,6 @@ const ManageUpdated = () => {
       ErrorToaster(err.message);
     }
   };
-  console.log(service);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -35,7 +34,7 @@ const ManageUpdated = () => {
       [name]: value,
     }));
   };
-
+  // update
   const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -47,7 +46,7 @@ const ManageUpdated = () => {
         photo: user?.photoURL,
       },
       price: parseFloat(service.price),
-      service_area: service.service_area,
+      category: service.category,
       photoURL: service.photoURL,
       description: service.description,
       bid_count: 0,
@@ -63,7 +62,8 @@ const ManageUpdated = () => {
     }
   };
 
-  const { title, price, service_area, photoURL, description } = service || {};
+  const { category, price, service_area, photoURL, description } =
+    service || {};
   return (
     <div className="flex justify-center items-center min-h-[calc(100vh-306px)] my-12">
       <section className="p-2 md:p-6 mx-auto bg-white rounded-md shadow-md">
@@ -87,19 +87,21 @@ const ManageUpdated = () => {
               />
             </div>
 
-            <div>
-              <label className="text-gray-700 " htmlFor="service_title">
-                Service Name
+            <div className="flex flex-col gap-2 ">
+              <label className="text-gray-700 " htmlFor="category">
+                Category
               </label>
-              <input
-                id="service_title"
-                name="title"
+              <select
+                name="category"
+                id="category"
                 onChange={handleChange}
-                value={title || ""}
-                type="text"
-                required
-                className="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-500 rounded-md focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40 focus:outline-none focus:ring"
-              />
+                value={category || ""}
+                className="border text-gray-700 p-2 rounded-md"
+              >
+                <option value="Laptop Service">Laptop Service</option>
+                <option value="SmartPhone Service">SmartPhone Service</option>
+                <option value="Desktop Service">Desktop Service</option>
+              </select>
             </div>
 
             <div>

@@ -1,10 +1,10 @@
 import React from "react";
-import { useAuth } from "../auth/AtuhProvider";
 import { Link } from "react-router-dom";
 import { Tooltip } from "react-tooltip";
+import UseAuth from "../auth/UseAuth";
 
 const Profile = () => {
-  const { user, userLogOut } = useAuth();
+  const { user, userLogOut } = UseAuth();
   return (
     <div>
       {user && user?.email ? (

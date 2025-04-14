@@ -1,55 +1,53 @@
 import axios from "axios";
 import React, { useState, useEffect } from "react";
-import { useAuth } from "../../auth/AtuhProvider";
 import ErrorToaster from "../../component/ErrorToaster";
 import toast from "react-hot-toast";
 import { Link } from "react-router-dom";
+import UseAuth from "../../auth/UseAuth";
 
 const ManageServices = () => {
-  const { user } = useAuth();
+  const { user } = UseAuth();
   const [services, setServices] = useState([]);
 
-  // data fetch
+  // fetch data
+  const fetchAllServices = async () => {
+    try {
+      await axios
+        .get(
+          `${import.meta.env.VITE_API_URL}/my-services?email=${user.email}`,
+          {
+            withCredentials: true,
+          }
+        )
+        .then((response) => {
+          setServices(response.data);
+        });
+    } catch (err) {
+      ErrorToaster(err.message);
+    }
+  };
+
+  // data fetch call
   useEffect(() => {
     if (user?.email) {
       fetchAllServices();
     }
   }, [user?.email]);
 
-  // fetch data
-  const fetchAllServices = async () => {
-    try {
-      const { data } = await axios.get(
-        `${import.meta.env.VITE_API_URL}/services?email=${user.email}`,
-        {
-          withCredentials: true,
-        }
-      );
-      setServices(data);
-    } catch (err) {
-      ErrorToaster(err.message);
-    }
-  };
-
-  if (!services.length) return <div>No services found</div>;
-
-  const getStatusBadgeColor = (status) => {
-    switch (status) {
-      case "Pending":
-        return "bg-yellow-500";
-      case "Working":
-        return "bg-blue-500";
-      case "Completed":
-        return "bg-green-500";
-      default:
-        return "bg-gray-300 ";
-    }
-  };
+  if (!services.length)
+    return (
+      <div className="my-4 font-bold text-center text-3xl">
+        Please Added Your Services
+      </div>
+    );
 
   // handle delete
   const handleDelete = async (id) => {
     try {
-      await axios.delete(`${import.meta.env.VITE_API_URL}/service/${id}`);
+      await axios.delete(
+        `${import.meta.env.VITE_API_URL}/service-delete/${id}`,
+        { withCredentials: true }
+      );
       toast.success("Data Deleted Successfully!!!");
       fetchAllServices();
     } catch (err) {
@@ -89,7 +87,9 @@ const ManageServices = () => {
   return (
     <section className="my-8">
       <div className="flex items-center gap-x-3">
-        <h2 className="text-lg font-medium ">My Book Now</h2>
+        <h2 className="text-lg font-medium ">
+          My Service{services?.length > 1 && "s"} Added
+        </h2>
 
         <span className="px-3 py-1 text-xs text-white bg-green-500/80 rounded-full ">
           {services?.length} Service{services?.length > 1 && "s"}
@@ -114,15 +114,6 @@ const ManageServices = () => {
 
                     <th
                       scope="col"
-                      className="py-3.5 px-4 text-sm font-normal text-left rtl:text-right text-gray-500"
-                    >
-                      <div className="flex items-center gap-x-3">
-                        <span>Title</span>
-                      </div>
-                    </th>
-
-                    <th
-                      scope="col"
                       className="px-4 py-3.5 text-sm font-normal text-left rtl:text-right text-gray-500"
                     >
                       <button className="flex items-center gap-x-2">
@@ -136,6 +127,15 @@ const ManageServices = () => {
                       <button className="flex items-center gap-x-2">
                         <span>Location</span>
                       </button>
+                    </th>
+
+                    <th
+                      scope="col"
+                      className="py-3.5 px-4 text-sm font-normal text-left rtl:text-right text-gray-500"
+                    >
+                      <div className="flex items-center gap-x-3">
+                        <span>Category</span>
+                      </div>
                     </th>
 
                     <th
@@ -166,14 +166,10 @@ const ManageServices = () => {
                     <tr>
                       <td className="px-4 py-4 text-sm text-gray-500  whitespace-nowrap">
                         <img
-                          src={user?.photoURL}
+                          src={service?.photoURL}
                           alt={service?.title}
                           className="w-16 h-16  rounded-md"
                         />
-                      </td>
-
-                      <td className="px-4 py-4 text-sm text-gray-500  whitespace-nowrap">
-                        {service?.title}
                       </td>
 
                       <td className="px-4 py-4 text-sm text-gray-500  whitespace-nowrap">
@@ -183,14 +179,57 @@ const ManageServices = () => {
                         {service?.service_area}
                       </td>
 
-                      <td className="px-4 py-4 text-sm text-gray-500 whitespace-nowrap">
-                        <span
-                          className={`text-sm px-3 py-1 rounded-full font-semibold ${getStatusBadgeColor(
-                            service?.status
-                          )}`}
+                      <td className="px-4 py-4 text-sm whitespace-nowrap">
+                        <div className="flex items-center gap-x-2">
+                          <p
+                            className={`px-3 py-1 text-gray-800/70 font-bold  ${
+                              service.category === "Laptop Service" &&
+                              "text-blue-500 bg-blue-200/60"
+                            } ${
+                              service.category === "Smartphone Service" &&
+                              "text-green-500 bg-green-100/60"
+                            }
+                            ${
+                              service.category === "Desktop Service" &&
+                              "text-red-500 bg-red-100/60"
+                            } text-xs rounded-full`}
+                          >
+                            {service.category}
+                          </p>
+                        </div>
+                      </td>
+
+                      <td className="px-4 py-4 text-sm font-medium text-gray-700 whitespace-nowrap">
+                        <div
+                          className={`inline-flex items-center px-3 py-1 rounded-full gap-x-2 ${
+                            service.status === "Pending" &&
+                            " bg-yellow-100/60 text-yellow-500"
+                          } ${
+                            service.status === "Working" &&
+                            " bg-blue-100/60 text-blue-500"
+                          } ${
+                            service.status === "Completed" &&
+                            " bg-green-100/60 text-green-500"
+                          } ${
+                            service.status === "Rejected" &&
+                            " bg-red-100/60 text-red-500"
+                          }`}
                         >
-                          {service.status}
-                        </span>
+                          <span
+                            className={`h-1.5 w-1.5 rounded-full ${
+                              service.status === "Pending" && "bg-yellow-500"
+                            } ${
+                              service.status === "Working" && "bg-blue-500"
+                            } ${
+                              service.status === "Completed" && "bg-green-500"
+                            } ${
+                              service.status === "Rejected" && "bg-red-500"
+                            } `}
+                          ></span>
+                          <h2 className="text-sm font-normal ">
+                            {service.status}
+                          </h2>
+                        </div>
                       </td>
 
                       <td className="px-4 py-4 text-sm text-gray-500  whitespace-nowrap">
