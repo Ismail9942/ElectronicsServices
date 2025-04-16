@@ -31,17 +31,15 @@ const Services = () => {
       if (search !== "") {
         fetchData();
       } else {
-        // যদি সার্চ খালি হয়, সব সার্ভিস দেখাবে
         fetchData();
       }
-    }, 500); // 500ms ডিবাউন্স
+    }, 500);
 
     return () => clearTimeout(timerId);
   }, [search]);
 
   const handleSearch = (e) => {
     e.preventDefault();
-    // সার্চ ভ্যালু ইতিমধ্যে স্টেটে আছে, ইফেক্ট অটো কল হবে
   };
 
   const handleReset = () => {

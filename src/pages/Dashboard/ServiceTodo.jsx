@@ -9,6 +9,7 @@ const ServiceTodo = () => {
   const { user, userLogOut } = UseAuth();
   const navigate = useNavigate();
   const [services, setServices] = useState([]);
+  const [loading, setLoading] = useState(true);
 
   // data fetch
   useEffect(() => {
@@ -18,21 +19,20 @@ const ServiceTodo = () => {
   }, [user?.email]);
 
   const fetchAllServices = async () => {
+    setLoading(true);
     try {
       const { data } = await axios.get(
         `${import.meta.env.VITE_API_URL}/bookNow/${user.email}?provider=true`,
-        {
-          withCredentials: true,
-        }
+        { withCredentials: true }
       );
       setServices(data);
     } catch (error) {
       if (error.response.status === 401 || error.response.status === 403) {
-        // logout
         userLogOut();
-        // navigate to login
         navigate("/login");
       }
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -51,13 +51,6 @@ const ServiceTodo = () => {
     }
   };
 
-  // if (!services.length)
-  //   return (
-  //     <div className="mt-6 font-bold text-center text-3xl">
-  //       Your Service Not Added
-  //     </div>
-  //   );
-
   return (
     <section className="my-8">
       <div className="flex items-center gap-x-3">
@@ -66,7 +59,10 @@ const ServiceTodo = () => {
         </h2>
 
         <span className="px-3 py-1 text-xs text-white bg-green-500/80 rounded-full ">
-          {services?.length} Service{services?.length > 1 && "s"}
+          {services?.length === 1
+            ? "1 Service To Do"
+            : `${services?.length} Service`}
+          {services?.length > 1 && "s"}
         </span>
       </div>
 
@@ -115,7 +111,7 @@ const ServiceTodo = () => {
                       className="px-4 py-3.5 text-sm font-normal text-left rtl:text-right text-gray-500"
                     >
                       <button className="flex items-center gap-x-2">
-                        <span>Categogy</span>
+                        <span>Category</span>
                       </button>
                     </th>
 
@@ -132,15 +128,34 @@ const ServiceTodo = () => {
                   </tr>
                 </thead>
 
-                {/* ganatate dynamic update */}
                 <tbody className="bg-white divide-y divide-gray-200 ">
-                  {services?.map((service) => (
-                    <CostomerRequests
-                      key={service._id}
-                      service={service}
-                      handleStatusChange={handleStatusChange}
-                    />
-                  ))}
+                  {loading ? (
+                    <tr>
+                      <td
+                        colSpan="7"
+                        className="text-center py-10 text-gray-500"
+                      >
+                        Loading...
+                      </td>
+                    </tr>
+                  ) : services.length === 0 ? (
+                    <tr>
+                      <td
+                        colSpan="7"
+                        className="text-center py-10 text-gray-500"
+                      >
+                        No Available Service.
+                      </td>
+                    </tr>
+                  ) : (
+                    services.map((service) => (
+                      <CostomerRequests
+                        key={service._id}
+                        service={service}
+                        handleStatusChange={handleStatusChange}
+                      />
+                    ))
+                  )}
                 </tbody>
               </table>
             </div>

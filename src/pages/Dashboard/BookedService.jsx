@@ -7,22 +7,31 @@ import UseAuth from "../../auth/UseAuth";
 const BookedService = () => {
   const { user } = UseAuth();
   const [services, setServices] = useState([]);
+  const [loading, setLoading] = useState(true);
 
   const fetchAllServices = async () => {
+    setLoading(true);
     try {
-      const { data } = await axios.get(
-        `${import.meta.env.VITE_API_URL}/myBook?email=${user.email}`
+      const response = await axios.get(
+        `${import.meta.env.VITE_API_URL}/myBook?${user?.email}&provider: true`,
+        {
+          withCredentials: true,
+        }
       );
-      setServices(data);
-    } catch (err) {
-      ErrorToaster(err.message);
+      setServices(response.data);
+    } catch (error) {
+      console.error("Error fetching bookings:", error);
+    } finally {
+      setLoading(false);
     }
   };
 
   // data fetch
   useEffect(() => {
-    fetchAllServices();
-  }, []);
+    if (user?.email) {
+      fetchAllServices();
+    }
+  }, [user]);
 
   const handleStatusChange = async (id, prevStatus, status) => {
     if (prevStatus !== "Working") return ErrorToaster("Not Allowed");
@@ -103,14 +112,35 @@ const BookedService = () => {
                   </tr>
                 </thead>
                 {/* ganatate dynamic update */}
-                <tbody className="bg-white divide-y divide-gray-500 ">
-                  {services?.map((service) => (
-                    <MyServiceRequests
-                      key={service._id}
-                      service={service}
-                      handleStatusChange={handleStatusChange}
-                    />
-                  ))}
+
+                <tbody className="bg-white divide-y divide-gray-200 ">
+                  {loading ? (
+                    <tr>
+                      <td
+                        colSpan="7"
+                        className="text-center py-10 text-gray-500"
+                      >
+                        Loading...
+                      </td>
+                    </tr>
+                  ) : services.length === 0 ? (
+                    <tr>
+                      <td
+                        colSpan="7"
+                        className="text-center py-10 text-gray-500"
+                      >
+                        No Available Service.
+                      </td>
+                    </tr>
+                  ) : (
+                    services.map((service) => (
+                      <MyServiceRequests
+                        key={service._id}
+                        service={service}
+                        handleStatusChange={handleStatusChange}
+                      />
+                    ))
+                  )}
                 </tbody>
               </table>
             </div>

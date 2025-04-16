@@ -24,7 +24,7 @@ const Profile = () => {
 
           <button
             onClick={userLogOut}
-            className="btn btn-sm md:btn-md mr-2 bg-[#e7000b] hover:bg-red-700 text-white font-bold hover:bg-gradient-to-l transition-all duration-300 border-none"
+            className="btn btn-sm md:btn-md mr-2 bg-red-600 hover:bg-red-700 text-white font-bold hover:bg-gradient-to-l transition-all duration-300 border-none"
           >
             Logout
           </button>
@@ -32,7 +32,7 @@ const Profile = () => {
       ) : (
         <Link
           to="/login"
-          className="btn btn-sm md:btn-md mr-2 bg-[#e7000b] hover:bg-red-700 text-white font-bold hover:bg-gradient-to-l transition-all duration-300 border-none"
+          className="btn btn-sm md:btn-md mr-2 bg-red-600 hover:bg-red-700 text-white font-bold hover:bg-gradient-to-l transition-all duration-300 border-none"
         >
           Login
         </Link>

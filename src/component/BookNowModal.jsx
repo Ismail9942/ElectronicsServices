@@ -36,7 +36,8 @@ const BookNowModal = ({ service, isOpen, onClose }) => {
     try {
       const res = await axios.post(
         `${import.meta.env.VITE_API_URL}/bookNow`,
-        bookingData
+        bookingData,
+        { withCredentials: true }
       );
       if (res.data.insertedId) {
         SuccesToaster("Booking successful!");
